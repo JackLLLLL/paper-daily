@@ -1,0 +1,23 @@
+{
+  "name": "paper-daily",
+  "version": "1.0.0",
+  "description": "paper daily check-in system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackLLLLL/paper-daily.git"
+  },
+  "author": "JackLLLLL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JackLLLLL/paper-daily/issues"
+  },
+  "homepage": "https://github.com/JackLLLLL/paper-daily#readme",
+  "dependencies": {
+    "nedb": "^1.8.0",
+    "react": "^16.4.1"
+  }
+}
