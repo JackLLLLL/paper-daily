@@ -1,6 +1,11 @@
 # paper-daily
 check-in web page for cjc gaming club
 
+### components needed:
+* pwa
+* React
+* NeDB
+
 ### features to implement:
 * log in, log out, sign in
 * set task (what to read)
