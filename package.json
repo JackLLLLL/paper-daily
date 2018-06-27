@@ -1,23 +1,45 @@
 {
   "name": "paper-daily",
   "version": "1.0.0",
-  "description": "paper daily check-in system",
-  "main": "index.js",
+  "description": "paper daily check in system",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JackLLLLL/paper-daily.git"
   },
+  "keywords": [
+    "koa",
+    "react",
+    "ywa",
+    "nedb"
+  ],
   "author": "JackLLLLL",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/JackLLLLL/paper-daily/issues"
   },
   "homepage": "https://github.com/JackLLLLL/paper-daily#readme",
-  "dependencies": {
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "bluebird": "^3.5.1",
+    "koa": "^2.5.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "nedb": "^1.8.0",
-    "react": "^16.4.1"
+    "webpack": "^4.12.1",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.2"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }

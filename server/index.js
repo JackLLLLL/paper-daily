@@ -1,21 +1,52 @@
-const http = require('http');
-      config = require('./config');
+// server
+const Koa = require("koa")
+const koaStatic = require("koa-static")
+const path = require("path")
+const Router = require('koa-router')
+const fs = require('fs')
+const webpack = require('webpack')
+const webpackConfig = require('../webpack/webpack.config')
+const devMiddleware = require('./middlewares/devMiddleware')
 
-// get port number from config
-var port = config.SERVER_PORT;
+const app = new Koa()
+const router = new Router()
+const compiler = webpack(webpackConfig)
 
-var start = function() {
+const SERVER_PORT = 3000;
 
-    var server = http.createServer(function(require, response) {
-        response.writeHead('200', {'Content-Type': 'text/plain'});
-        response.end("my first web");
-    });
-    
-    server.listen(port, function(){
-        console.log('server now listening on port ' + port);
-    });
-}
+// webpack
+app.use(devMiddleware(compiler, {
+    noInfo: true,
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: false
+    },
+    publicPath: webpackConfig.output.publicPath,
+    stats: {
+        colors: true
+    }
+}))
 
-module.exports = {
-    start:start,
-}
+// middlewares
+app.use(koaStatic(path.join(__dirname, "..", "public")));
+
+// router 
+router.get('*', async (ctx, next) => {
+    const htmlFile = await new Promise((resolve, reject) => {
+        fs.readFile(path.join(__dirname,'../public/index.html'), (err, data) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(data.toString())
+            }
+        })
+    })
+    ctx.type = 'html'
+    ctx.body = htmlFile
+})
+
+app.use(router.routes()).use(router.allowedMethods())
+
+app.listen(SERVER_PORT, () => {
+    console.log("running on port " + SERVER_PORT)
+});
