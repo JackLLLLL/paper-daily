@@ -16,6 +16,10 @@ const clientConfig = {
         enforce: "pre",
         exclude: /node_modules/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },

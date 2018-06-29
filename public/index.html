@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <title>My first React Demo</title>
     <!-- Add manifest -->
     <link rel="manifest" href="manifest.json">
     <!-- Tell the browser it's a PWA -->
@@ -15,7 +17,6 @@
     <link rel="apple-touch-icon" sizes="192x192" href="icon192.png">
     <!-- Make sure theme-color is defined -->
     <meta name="theme-color" content="#536878">
-    <title>React App</title>
 
     <style type="text/css">
         body {
@@ -38,7 +39,7 @@
       </style>
 </head>
 
-<body>
+<body class="skin-blue sidebar-mini ">
     <div id="root" style="height:100%">
         <div class="App">
             <div class="App-header">
@@ -50,6 +51,7 @@
             </p>
         </div>
     </div>
+
     <script src="bundle.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
