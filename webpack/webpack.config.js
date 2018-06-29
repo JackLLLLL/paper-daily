@@ -15,11 +15,15 @@ const clientConfig = {
         test: /\.(js|jsx)$/,
         enforce: "pre",
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ["babel-loader"],
       },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.(png|svf|jpg)$/,
+        use: ["img-loader?limit=10000"]
       }
     ]
   },
