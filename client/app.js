@@ -10,7 +10,8 @@ const { Header, Footer, Sider, Content } = Layout;
 class App extends React.Component {
     state = {
         loading: true,
-        events: {}
+        events: {},
+        badge_count: 0,
     }
 
     setStateAsync (state) {
@@ -28,6 +29,14 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
+        // console.log("begin mounting")
+
+        // // get events in cache
+        // const cache = await caches.open('my-pwa-cache-v1')
+        // const matchedResponse = await cache.match('https://api.github.com/orgs/ionlyloveresearch/events')
+        // const cached_events = await (matchedResponse == undefined? undefined : matchedResponse.json())
+        
+        // get new events data
         const res = await fetch ("https://api.github.com/orgs/ionlyloveresearch/events", {
             cache: 'no-cache', 
             headers: {
@@ -42,7 +51,18 @@ class App extends React.Component {
 
         const events = await res.json()
 
-        await this.setStateAsync({events: events, loading: false})
+        // var count;
+        // if (cached_events != undefined) {
+        //     count = await events.findIndex((element) => {
+        //         return element.id == cached_events[0].id
+        //     })
+        // } else {
+        //     count = 0;
+        // }
+        
+        // console.log("count is " + count) 
+        
+        await this.setStateAsync({events: events, loading: false, badge_count: 0})
     }
 
     async handleClick(event) {
@@ -64,7 +84,7 @@ class App extends React.Component {
 
         const events = await res.json()
 
-        await this.setStateAsync({events: events, loading: false})
+        await this.setStateAsync({events: events, loading: false, badge_count: 0})
     }
 
     render () {
@@ -110,7 +130,7 @@ class App extends React.Component {
             <Layout>
                 <Header className="header" style={{ textAlign: 'center' }}>
                     <span style={{ fontSize: 24 }}> Paper Daily Timeline </span>
-                    <Badge count={3} >
+                    <Badge count={this.state.badge_count} >
                         <Icon type={this.state.loading? "loading" : "reload"} style={{ fontSize: 32, position: "relative", left: "25px" }} onClick={ this.handleClick.bind(this) } />
                         {/* <Button type="dashed" icon="reload" loading={this.state.loading} onClick={this.enterLoading} size="large" ghost style={{ position: "relative", left: "25px" }} /> */}
                     </Badge>

@@ -28,7 +28,7 @@ self.addEventListener('install', function(event) {
         .then(function(cache) {
           // Get the assets manifest so we can see what our js file is named
           // This is because webpack hashes it
-          fetch("asset-manifest.json")
+          fetch("manifest.json")
             .then(response => {
               response.json()
             })
@@ -38,7 +38,9 @@ self.addEventListener('install', function(event) {
               // We could also cache any static assets like CSS or images
               const urlsToCache = [
                 "/",
-                assets["main.js"]
+                // "./index.html",
+                // "./bundle.js",
+                // "https://api.github.com/orgs/ionlyloveresearch/events"
               ]
               cache.addAll(urlsToCache)
               console.log('cached');
@@ -52,10 +54,11 @@ self.addEventListener('install', function(event) {
 // if we have them
 self.addEventListener('fetch', function(event) {
     if (doCache) {
-      event.respondWith(
-          caches.match(event.request).then(function(response) {
-              return response || fetch(event.request);
-          })
+        event.respondWith(
+            caches.match(event.request).then(function(response) {
+                return response || fetch(event.request);
+            })
       );
     }
 });
+

@@ -12,7 +12,7 @@ const app = new Koa()
 const router = new Router()
 const compiler = webpack(webpackConfig)
 
-const SERVER_PORT = 3000;
+const SERVER_PORT = 18888;
 
 // webpack
 app.use(devMiddleware(compiler, {
