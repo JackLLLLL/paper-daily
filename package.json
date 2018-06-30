@@ -35,9 +35,6 @@
     "babel-runtime": "^6.26.0",
     "css-loader": "^0.28.11",
     "img-loader": "^3.0.0",
-    "koa": "^2.5.1",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
@@ -47,6 +44,9 @@
   "dependencies": {
     "antd": "^3.6.4",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "koa": "^2.5.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
   }
 }
