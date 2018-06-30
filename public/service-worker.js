@@ -38,9 +38,9 @@ self.addEventListener('install', function(event) {
               // We could also cache any static assets like CSS or images
               const urlsToCache = [
                 "/",
-                // "./index.html",
+                "./index.html",
                 // "./bundle.js",
-                // "https://api.github.com/orgs/ionlyloveresearch/events"
+                "https://api.github.com/orgs/ionlyloveresearch/events"
               ]
               cache.addAll(urlsToCache)
               console.log('cached');

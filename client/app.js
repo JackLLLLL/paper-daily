@@ -29,16 +29,18 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
-        // console.log("begin mounting")
+        console.log("begin mounting")
 
-        // // get events in cache
+        // get events in cache
         // const cache = await caches.open('my-pwa-cache-v1')
         // const matchedResponse = await cache.match('https://api.github.com/orgs/ionlyloveresearch/events')
-        // const cached_events = await (matchedResponse == undefined? undefined : matchedResponse.json())
+        // const cached_events = await (matchedResponse == undefined? {} : matchedResponse.json())
+
+        // console.log(cached_events)
         
         // get new events data
         const res = await fetch ("https://api.github.com/orgs/ionlyloveresearch/events", {
-            cache: 'no-cache', 
+            cache: 'default', 
             headers: {
                 'user-agent': 'Mozilla/4.0 Jack',
                 'content-type': 'application/json'
@@ -52,7 +54,7 @@ class App extends React.Component {
         const events = await res.json()
 
         // var count;
-        // if (cached_events != undefined) {
+        // if (cached_events != {}) {
         //     count = await events.findIndex((element) => {
         //         return element.id == cached_events[0].id
         //     })

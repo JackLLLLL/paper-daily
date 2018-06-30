@@ -4,28 +4,28 @@ const koaStatic = require("koa-static")
 const path = require("path")
 const Router = require('koa-router')
 const fs = require('fs')
-const webpack = require('webpack')
-const webpackConfig = require('../webpack/webpack.config')
-const devMiddleware = require('./middlewares/devMiddleware')
+// const webpack = require('webpack')
+// const webpackConfig = require('../webpack/webpack.config')
+// const devMiddleware = require('./middlewares/devMiddleware')
 
 const app = new Koa()
 const router = new Router()
-const compiler = webpack(webpackConfig)
+// const compiler = webpack(webpackConfig)
 
 const SERVER_PORT = 18888;
 
-// webpack
-app.use(devMiddleware(compiler, {
-    noInfo: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: false
-    },
-    publicPath: webpackConfig.output.publicPath,
-    stats: {
-        colors: true
-    }
-}))
+// // webpack
+// app.use(devMiddleware(compiler, {
+//     noInfo: true,
+//     watchOptions: {
+//         aggregateTimeout: 300,
+//         poll: false
+//     },
+//     publicPath: webpackConfig.output.publicPath,
+//     stats: {
+//         colors: true
+//     }
+// }))
 
 // middlewares
 app.use(koaStatic(path.join(__dirname, "..", "public")));
