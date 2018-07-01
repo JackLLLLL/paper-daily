@@ -2,10 +2,12 @@
 ~~check-in web page for cjc gaming club~~  github wiki history display page
 
 ### components needed:
-* pwa (service worker) ✔️
-* React ✔️
-* koa ✔️
-* NeDB ❌
+* [pwa](https://developer.mozilla.org/en-US/Apps/Progressive) (service worker) ✔️
+* [React](https://github.com/facebook/react) ✔️
+* [koa](https://github.com/koajs/koa) ✔️
+* [NeDB](https://github.com/louischatriot/nedb) ❌
+* [bluebird](https://github.com/petkaantonov/bluebird) (promisify all nedb query) ❌
+* [Ant Design](https://github.com/ant-design/ant-design) ✔️
 
 ### features to implement:
 * log in, log out, sign in  ❌
