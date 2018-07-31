@@ -96,35 +96,39 @@ class App extends React.Component {
         var agains_created = '';
         var agains_edited = '';
         for (var i=this.state.events.length-1; i > -1; i--) {
-            if (this.state.events != {} && this.state.events[i].payload.pages[0].action == 'created') {
-                let previousEvent = thisEvent;
-                let thisEvent = this.state.events[i];
-                if (previousEvent != undefined && thisEvent.actor.id === previousEvent.actor.id) {
-                    agains_created += '又'
-                } else {
-                    agains_created = ''
+            // console.log(i)
+            // console.log(this.state.events[i])
+            if (this.state.events != {} && this.state.events[i].type == 'GollumEvent') {
+                if (this.state.events[i].payload.pages[0].action == 'created') {
+                    let previousEvent = thisEvent;
+                    let thisEvent = this.state.events[i];
+                    if (previousEvent != undefined && thisEvent.actor.id === previousEvent.actor.id) {
+                        agains_created += '又'
+                    } else {
+                        agains_created = ''
+                    }
+                    timelineItems.unshift(<Timeline.Item dot={<Avatar size="default" src={thisEvent.actor.avatar_url} />} >
+                                                <span style={{ fontSize: 10, color: "#C8C2BB" }}> &nbsp;&nbsp;{new Date(thisEvent.created_at).getYear()+1900}年
+                                                    {new Date(thisEvent.created_at).getMonth()+1}月{new Date(thisEvent.created_at).getDate()}日
+                                                    {new Date(thisEvent.created_at).getHours()}:{new Date(thisEvent.created_at).getMinutes()}:{new Date(thisEvent.created_at).getMinutes()} </span> <br />
+                                                {thisEvent.actor.display_login}同学{agains_created}读了一篇paper啦!~ <br />
+                                                TA在github的{thisEvent.repo.name.split('/')[1]} repo里创建了题目是<a href={thisEvent.payload.pages[0].html_url}> {thisEvent.payload.pages[0].title} </a>的精致分析~ 快去看看吧~ <br />
+                                            </Timeline.Item>);
+                } else if (this.state.events[i].payload.pages[0].action == 'edited') {
+                    let previousEvent = thisEvent;
+                    let thisEvent = this.state.events[i];
+                    if (previousEvent != undefined && thisEvent.payload.pages[0].html_url === previousEvent.payload.pages[0].html_url) {
+                        agains_edited += '又'
+                    } else {
+                        agains_edited = ''
+                    }
+                    timelineItems.unshift(<Timeline.Item dot={<Avatar size="default" src={thisEvent.actor.avatar_url} />} >
+                                                <span style={{ fontSize: 10, color: "#C8C2BB" }}> &nbsp;&nbsp;{new Date(thisEvent.created_at).getYear()+1900}年
+                                                    {new Date(thisEvent.created_at).getMonth()+1}月{new Date(thisEvent.created_at).getDate()}日
+                                                    {new Date(thisEvent.created_at).getHours()}:{new Date(thisEvent.created_at).getMinutes()}:{new Date(thisEvent.created_at).getMinutes()} </span> <br />
+                                                {thisEvent.actor.display_login}同学在github的{thisEvent.repo.name.split('/')[1]}repo里{agains_edited}修改了<a href={thisEvent.payload.pages[0].html_url}> {thisEvent.payload.pages[0].title} </a>页面~ <br />
+                                            </Timeline.Item>);
                 }
-                timelineItems.unshift(<Timeline.Item dot={<Avatar size="default" src={thisEvent.actor.avatar_url} />} >
-                                            <span style={{ fontSize: 10, color: "#C8C2BB" }}> &nbsp;&nbsp;{new Date(thisEvent.created_at).getYear()+1900}年
-                                                {new Date(thisEvent.created_at).getMonth()+1}月{new Date(thisEvent.created_at).getDate()}日
-                                                {new Date(thisEvent.created_at).getHours()}:{new Date(thisEvent.created_at).getMinutes()}:{new Date(thisEvent.created_at).getMinutes()} </span> <br />
-                                            {thisEvent.actor.display_login}同学{agains_created}读了一篇paper啦!~ <br />
-                                            TA在github的{thisEvent.repo.name.split('/')[1]} repo里创建了题目是<a href={thisEvent.payload.pages[0].html_url}> {thisEvent.payload.pages[0].title} </a>的精致分析~ 快去看看吧~ <br />
-                                        </Timeline.Item>);
-            } else if (this.state.events != {} && this.state.events[i].payload.pages[0].action == 'edited') {
-                let previousEvent = thisEvent;
-                let thisEvent = this.state.events[i];
-                if (previousEvent != undefined && thisEvent.payload.pages[0].html_url === previousEvent.payload.pages[0].html_url) {
-                    agains_edited += '又'
-                } else {
-                    agains_edited = ''
-                }
-                timelineItems.unshift(<Timeline.Item dot={<Avatar size="default" src={thisEvent.actor.avatar_url} />} >
-                                            <span style={{ fontSize: 10, color: "#C8C2BB" }}> &nbsp;&nbsp;{new Date(thisEvent.created_at).getYear()+1900}年
-                                                {new Date(thisEvent.created_at).getMonth()+1}月{new Date(thisEvent.created_at).getDate()}日
-                                                {new Date(thisEvent.created_at).getHours()}:{new Date(thisEvent.created_at).getMinutes()}:{new Date(thisEvent.created_at).getMinutes()} </span> <br />
-                                            {thisEvent.actor.display_login}同学在github的{thisEvent.repo.name.split('/')[1]}repo里{agains_edited}修改了<a href={thisEvent.payload.pages[0].html_url}> {thisEvent.payload.pages[0].title} </a>页面~ <br />
-                                        </Timeline.Item>);
             }
         }
 
